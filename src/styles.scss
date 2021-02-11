@@ -4,4 +4,5 @@
 /* Importing Bootstrap SCSS file. */
 
 @import '~bootstrap/scss/bootstrap';
-// @import '~ngx-toastr/toastr';
+// regular style toast
+@import '~ngx-toastr/toastr';

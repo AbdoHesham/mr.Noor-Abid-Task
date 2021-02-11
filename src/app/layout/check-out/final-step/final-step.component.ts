@@ -1,9 +1,6 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastService } from '../../../../service/toast.service';
-
-
-// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -14,11 +11,10 @@ import { ToastService } from '../../../../service/toast.service';
 export class FinalStepComponent implements OnInit {
   addcard: FormGroup;
 
-  constructor(    private fb: FormBuilder,
-    public toastService: ToastService
-    // private toastr: ToastrService
+  constructor(
+    private toastr: ToastrService,
+       private fb: FormBuilder
     ) { }
-    isTemplate(toast) { return toast.textOrTpl instanceof TemplateRef; }
 
 
   ngOnInit(): void {
@@ -34,24 +30,6 @@ export class FinalStepComponent implements OnInit {
 
   }
 
-  //  validateExpiry (input) {
-  //   // ensure basic format is correct
-  //   if (input.match(/^(0\d|1[0-2])\/\d{2}$/)) {
-  //     const {0: month, 1: year} = input.split("/");
-
-  //     // get midnight of first day of the next month
-  //     const expiry = new Date(20+year, month);
-  //     const current = new Date();
-
-  //     return expiry.getTime() > current.getTime();
-
-  //   } else return false;
-  // }
-
-  showSuccess() {
-    console.log("clicked")
-    this.toastService.show('I am a success toast', { classname: 'bg-success text-light', delay: 10000 });
-  }
 
 addProduct( ) {
 
@@ -69,9 +47,8 @@ addProduct( ) {
       }
     );
     localStorage.setItem('CartItems', JSON.stringify(productItems));
-
-
-
+    this.toastr.success(" your information added successfully")
+this.addcard.reset()
 
 }
 
@@ -88,6 +65,8 @@ else {
     }
   );
   localStorage.setItem('CartItems', JSON.stringify(productItems));
+  this.toastr.success(" your information added successfully")
+  this.addcard.reset()
 }
 
 
