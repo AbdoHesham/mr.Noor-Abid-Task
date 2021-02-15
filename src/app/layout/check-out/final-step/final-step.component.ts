@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -13,7 +14,8 @@ export class FinalStepComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-       private fb: FormBuilder
+       private fb: FormBuilder,
+       private router : Router
     ) { }
 
 
@@ -49,11 +51,13 @@ addProduct( ) {
     localStorage.setItem('CartItems', JSON.stringify(productItems));
     this.toastr.success(" your information added successfully")
 this.addcard.reset()
-
+this.router.navigateByUrl("home")
 }
 
 else {
-  productItems = JSON.parse(localStorage.getItem('CartItems')); // get product list
+      let productItems = [];
+
+      localStorage.setItem('CartItems', JSON.stringify(productItems));
 
   productItems.push(
     {
@@ -67,6 +71,8 @@ else {
   localStorage.setItem('CartItems', JSON.stringify(productItems));
   this.toastr.success(" your information added successfully")
   this.addcard.reset()
+  this.router.navigateByUrl("home")
+
 }
 
 
